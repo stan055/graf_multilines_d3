@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graf Multilines D3</title>
+</head>
+<body>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <!-- The `multiple` attribute lets users select multiple files. -->
+<input type="file" id="file-selector" onchange=read(this) accept=".csv">
+<div id="my_dataviz"></div>
+
+<script src="draw.js"></script>
+<script src="index.js"></script>
+
+<script>
+    fetch('fuel-prices.csv')
+        .then(response => response.text())
+        .then(text => {
+            var petrol = parseData(text, 'Petrol (USD)');
+    var diesel = parseData(text, 'Diesel (USD)');
+
+    let data = [ { key: 'petrol', values: petrol }, { key: 'diesel', values: diesel } ];
+    draw(data);
+        } );
+</script>
+</body>
+</html>
